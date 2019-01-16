@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "3bfd81ea-c29b-45f9-aec3-b805ff2fad76",
+		"name": "meal_options",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Create meal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"meal_time\": \"2019-02-14 18:00:00\"\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/meals",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"meals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. QUERY meals",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "USER_TOKEN",
+						"value": "test-user",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/meals",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"meals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. CREATE option",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"place\": \"KFC\"\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/meals/0/options",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"meals",
+						"0",
+						"options"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. QUERY options",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/meals/0/options",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"meals",
+						"0",
+						"options"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. Increase vote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/meals/0/options/0/votes",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"meals",
+						"0",
+						"options",
+						"0",
+						"votes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "caddy final",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "USER_TOKEN",
+						"value": "test-user",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost/meal-options/v1.0/meals?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"meal-options",
+						"v1.0",
+						"meals"
+					],
+					"query": [
+						{
+							"key": "USER-TOKEN",
+							"value": "test-user",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
