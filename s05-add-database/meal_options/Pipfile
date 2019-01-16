@@ -11,7 +11,6 @@ flask-restful = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
 pymysql = {extras = ["rsa"],version = "*"}
-graph = "*"
 
 [requires]
 python_version = "3.6"
