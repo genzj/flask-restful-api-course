@@ -16,4 +16,3 @@ class DevConfig(Config):
 class TestConfig(Config):
     ENV = 'test'
     DEBUG = True
-

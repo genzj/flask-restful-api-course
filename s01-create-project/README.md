@@ -18,7 +18,7 @@ Input project name and package name respectively when asked:
 
 ```bash
 cd meal_options
-pipenv --python 3
+pipenv --python 3.9
 pipenv install flask
 ```
 
@@ -31,9 +31,19 @@ edit following files, content can be copied from the repo:
 * `meal_options/meal_options/__init__.py`
 
 4. Test:
+   **Linux/MacOS**
 
-```bash
-pipenv shell
-FLASK_APP=meal_options flask run
-```
+   ```sh
+   pipenv shell
+   FLASK_APP=meal_options flask run
+   ```
 
+   **Windows**
+
+   ```
+   pipenv shell
+   set FLASK_APP=meal_options
+   flask run
+   ```
+
+   Open [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser.

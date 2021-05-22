@@ -7,4 +7,3 @@ from meal_options import app
 def index():
     app.logger.warning('sample message')
     return render_template('index.html')
-
