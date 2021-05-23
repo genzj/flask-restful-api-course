@@ -1,7 +1,6 @@
 from flask_restful import fields
 from datetime import datetime
 
-
 TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 
@@ -15,6 +14,7 @@ class Option(object):
         'place': fields.String,
         'votes': fields.Integer,
     }
+
     def __init__(self, idx, place):
         self.id = idx
         self.place = place
@@ -34,4 +34,3 @@ class Meal(object):
         self.create_time = datetime.utcnow()
         self.meal_time = meal_time
         self.options = []
-
