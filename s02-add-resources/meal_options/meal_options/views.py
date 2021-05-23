@@ -75,7 +75,7 @@ class Votes(Resource):
 
     def post(self, meal_id, option_id):
         meals[meal_id]['options'][option_id]['votes'] += 1
-        return 'OK'
+        return str(meals[meal_id]['options'][option_id]['votes'])
 
 
 api.add_resource(Votes, '/meals/<int:meal_id>/options/<int:option_id>/votes')
