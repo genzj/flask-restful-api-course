@@ -1,11 +1,10 @@
-import json
-
 from datetime import datetime
 
-from flask import request
-from flask_restful import Resource, marshal_with, marshal_with_field, reqparse
+from flask_restful import (
+    Resource, fields, marshal_with, marshal_with_field, reqparse
+)
 
-from . import app, api
+from . import api
 from .model import Option, Meal, TIME_FORMAT, list_of, db
 
 
@@ -14,11 +13,17 @@ def parse_datetime(s):
 
 
 meal_args = reqparse.RequestParser()
-meal_args.add_argument('meal_time', required=True, type=parse_datetime, help='time of the meal in format ' + TIME_FORMAT)
+meal_args.add_argument(
+    'meal_time',
+    required=True,
+    type=parse_datetime,
+    help='time of the meal in format ' + TIME_FORMAT
+)
 
 option_args = reqparse.RequestParser()
-option_args.add_argument('place', required=True, type=str, help='place for of the meal')
-
+option_args.add_argument(
+    'place', required=True, type=str, help='place for of the meal'
+)
 
 
 def create_meal(meal_time):
@@ -36,8 +41,8 @@ def create_option(meal_id, place):
     return option
 
 
-
 class Meals(Resource):
+
     @marshal_with_field(list_of(Meal))
     def get(self):
         return Meal.query.all()
@@ -52,6 +57,7 @@ api.add_resource(Meals, '/meals')
 
 
 class Options(Resource):
+
     @marshal_with_field(list_of(Option))
     def get(self, meal_id):
         meal = Meal.query.get_or_404(meal_id)
@@ -68,15 +74,22 @@ api.add_resource(Options, '/meals/<int:meal_id>/options')
 
 
 class Votes(Resource):
+
+    @marshal_with_field(fields.Integer)
     def post(self, meal_id, option_id):
         meal = Meal.query.get_or_404(meal_id)
-        option = Option.query.with_parent(meal).filter(Option.id == option_id).first_or_404()
-        print('----->', str(Option.query.with_parent(meal)))
+        option_of_meal = Option.query.with_parent(meal)
+        option = option_of_meal.filter(Option.id == option_id).first_or_404()
+        # print('----->', str(Option.query.with_parent(meal)), end='\n\n')
+        # print(
+        #     '----->',
+        #     str(option_of_meal.filter(Option.id == option_id)),
+        #     end='\n\n'
+        # )
         # option.votes += 1
         option.votes = Option.votes + 1
         db.session.commit()
-        return 'OK'
+        return option.votes
 
 
 api.add_resource(Votes, '/meals/<int:meal_id>/options/<int:option_id>/votes')
-

@@ -1,6 +1,6 @@
-from flask import Flask
-from flask_migrate import Migrate
+from pathlib import Path
 
+from flask import Flask
 
 from .model import db
 
@@ -20,7 +20,10 @@ def create_app(object_name):
     app.config.from_envvar('MEAL_OPTIONS_SETTINGS', silent=True)
 
     db.init_app(app)
-    migrate = Migrate(app, db)
+    db_file = Path(app.config['SQLALCHEMY_DATABASE_URI'].strip('sqlite:///'))
+    if not db_file.exists():
+        print(f'creating database ${db_file}')
+        db.create_all(app=app)
 
     if app.config['DEBUG']:
         import logging
@@ -29,4 +32,3 @@ def create_app(object_name):
         logger.setLevel(logging.INFO)
 
     return app
-
