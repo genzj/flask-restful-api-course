@@ -16,4 +16,3 @@ def create_app(object_name):
     app.config.from_envvar('MEAL_OPTIONS_SETTINGS', silent=True)
 
     return app
-
