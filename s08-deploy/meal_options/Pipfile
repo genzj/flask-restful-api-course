@@ -1,18 +1,16 @@
 [[source]]
-name = "pypi"
-url = "https://mirrors.aliyun.com/pypi/simple/"
+url = "https://pypi.org/simple"
 verify_ssl = true
-
-[dev-packages]
+name = "pypi"
 
 [packages]
 flask = "*"
 flask-restful = "*"
 flask-sqlalchemy = "*"
-flask-migrate = "*"
-pymysql = {extras = ["rsa"],version = "*"}
 gevent = "*"
 gunicorn = "*"
 
+[dev-packages]
+
 [requires]
-python_version = "3.6"
+python_version = "3.9"

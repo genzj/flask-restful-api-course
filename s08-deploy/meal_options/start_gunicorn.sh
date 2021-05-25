@@ -1,3 +1,3 @@
 #!/bin/bash
-gunicorn -c gunicorn.conf meal_options.wsgi
 
+gunicorn -c gunicorn.conf meal_options.wsgi

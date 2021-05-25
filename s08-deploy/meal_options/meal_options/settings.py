@@ -1,6 +1,6 @@
 class Config(object):
     SECRET_KEY = 'secret key'
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:1234@127.0.0.1:3306/test'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///./meal_options.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
@@ -18,4 +18,3 @@ class DevConfig(Config):
 class TestConfig(Config):
     ENV = 'test'
     DEBUG = True
-
