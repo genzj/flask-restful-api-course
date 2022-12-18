@@ -1,2 +1,0 @@
-recursive-include meal_options/templates *
-recursive-include meal_options/static *
