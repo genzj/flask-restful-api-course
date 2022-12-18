@@ -18,4 +18,4 @@ def client(app):
 
 def test_index(client):
     response = client.get("/")
-    assert response.status != 500
+    assert response.status_code != 500
