@@ -7,8 +7,10 @@ name = "pypi"
 flask = "*"
 flask-restful = "*"
 flask-sqlalchemy = "*"
+pytest = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.11"
+python_full_version = "3.11.1"
