@@ -1,49 +1,47 @@
 # STEP 1: create the project
 
-## How to get here
-
 1. Create the skeleton
 
 ```bash
 cookiecutter gh:candidtim/cookiecutter-flask-minimal
 ```
 
-Input project name and package name respectively when asked:
+When being asked, input following project name and package name:
 
 * project name: `meal-options`
 * package name: `meal_options`
 
-
-2. Install dependencies
+1. Install dependencies
 
 ```bash
 cd meal_options
-pipenv --python 3.9
+pipenv --python 3
 pipenv install flask
 ```
 
-3. Update settings and app creation:
+1. Update source code:
 
-edit following files, content can be copied from the repo:
+delete following unnecessary placeholder folders and files:
 
-* `meal_options/meal_options/settings.py`
-* `meal_options/meal_options/app_factory.py`
+* `meal_options/Makefile`
+* `meal_options/meal_options/static/`
+* `meal_options/meal_options/templates/`
+* `meal_options/meal_options/views.py`
+
+edit following files (check corresponding file in this repo for details):
+
+* `meal_options/meal_options/default_settings.py`
 * `meal_options/meal_options/__init__.py`
 
-4. Test:
-   **Linux/MacOS**
+add a new file for our business logic:
 
-   ```sh
-   pipenv shell
-   FLASK_APP=meal_options flask run
-   ```
+* `meal_options/meal_options/app.py`
 
-   **Windows**
+1. Test:
 
-   ```
-   pipenv shell
-   set FLASK_APP=meal_options
-   flask run
+   ```bash
+   pipenv run flask --app meal_options.app run
    ```
 
    Open [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser.
+   You're supposed to see `Hello World` in the browser.

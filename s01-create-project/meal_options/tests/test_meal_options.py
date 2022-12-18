@@ -1,17 +1,21 @@
-import unittest
+from meal_options import create_app
 
-import meal_options
-
-
-class Meal_optionsTestCase(unittest.TestCase):
-
-    def setUp(self):
-        self.app = meal_options.app.test_client()
-
-    def test_index(self):
-        rv = self.app.get('/')
-        self.assertIn('Welcome to meal-options', rv.data.decode())
+import pytest
 
 
-if __name__ == '__main__':
-    unittest.main()
+@pytest.fixture
+def app():
+    app = create_app({"TESTING": True})
+    # set up here
+    yield app
+    # tear down here
+
+
+@pytest.fixture
+def client(app):
+    return app.test_client()
+
+
+def test_index(client):
+    response = client.get("/")
+    assert response.status != 500
