@@ -1,12 +1,16 @@
+from . import create_app
+
 import json
 
 from datetime import datetime
 from typing import List
 
 from flask import request
-from flask_restful import Resource
+from flask_restful import Api, Resource
 
-from meal_options import api
+app = create_app()
+api = Api(app)
+
 
 TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
@@ -20,12 +24,11 @@ def datetime_format(dt):
 def create_meal(meal_time):
     idx = len(meals)
     meal = {
-        'id':
-            idx,
-        'create_time':
-            datetime_format(datetime.utcnow()),
-        'meal_time':
-            datetime_format(datetime.strptime(meal_time, TIME_FORMAT)),
+        'id': idx,
+        'create_time': datetime_format(datetime.utcnow()),
+        'meal_time': datetime_format(
+            datetime.strptime(meal_time, TIME_FORMAT)
+        ),
         'options': [],
     }
     meals.append(meal)
@@ -46,7 +49,6 @@ def create_option(meal_id, place):
 
 
 class Meals(Resource):
-
     def get(self):
         return meals
 
@@ -59,7 +61,6 @@ api.add_resource(Meals, '/meals')
 
 
 class Options(Resource):
-
     def get(self, meal_id):
         return meals[meal_id]['options']
 
@@ -72,7 +73,6 @@ api.add_resource(Options, '/meals/<int:meal_id>/options')
 
 
 class Votes(Resource):
-
     def post(self, meal_id, option_id):
         meals[meal_id]['options'][option_id]['votes'] += 1
         return str(meals[meal_id]['options'][option_id]['votes'])
