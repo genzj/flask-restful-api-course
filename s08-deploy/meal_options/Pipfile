@@ -7,10 +7,11 @@ name = "pypi"
 flask = "*"
 flask-restful = "*"
 flask-sqlalchemy = "*"
-gevent = "*"
-gunicorn = "*"
+pytest = "*"
+gunicorn = {extras = ["gevent"], version = "*", sys_platform = "== 'linux'"}
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.11"
+python_full_version = "3.11.1"

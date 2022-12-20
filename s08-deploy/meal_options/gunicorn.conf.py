@@ -7,3 +7,5 @@ error_logfile = '-'
 log_level = 'debug'
 
 chdir = 'meal_options'
+
+wsgi_app = 'meal_options.wsgi'

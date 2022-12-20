@@ -1,14 +1,19 @@
+from .auth import login
+from .model import db, Option, Meal, TIME_FORMAT, list_of
+
 from datetime import datetime
-from meal_options.auth import login_required, current_user
 
 from flask import Blueprint
 from flask_restful import (
-    Api, Resource, fields, marshal_with, marshal_with_field, reqparse
+    Api,
+    Resource,
+    fields,
+    marshal_with,
+    marshal_with_field,
+    reqparse,
 )
 
-from .model import Option, Meal, TIME_FORMAT, list_of, db
-
-meal_options_blueprint = Blueprint('meal_option', __name__)
+meal_options_blueprint = Blueprint('meal_options', __name__)
 api = Api(meal_options_blueprint)
 
 
@@ -21,7 +26,7 @@ meal_args.add_argument(
     'meal_time',
     required=True,
     type=parse_datetime,
-    help='time of the meal in format ' + TIME_FORMAT
+    help='time of the meal in format ' + TIME_FORMAT,
 )
 
 option_args = reqparse.RequestParser()
@@ -46,10 +51,9 @@ def create_option(meal_id, place):
 
 
 class Meals(Resource):
-
     @marshal_with_field(list_of(Meal))
-    @login_required
     def get(self):
+        current_user = login()
         print('---->', 'current user is:', current_user)
         return Meal.query.all()
 
@@ -63,7 +67,6 @@ api.add_resource(Meals, '/meals')
 
 
 class Options(Resource):
-
     @marshal_with_field(list_of(Option))
     def get(self, meal_id):
         meal = Meal.query.get_or_404(meal_id)
@@ -80,19 +83,11 @@ api.add_resource(Options, '/meals/<int:meal_id>/options')
 
 
 class Votes(Resource):
-
     @marshal_with_field(fields.Integer)
     def post(self, meal_id, option_id):
         meal = Meal.query.get_or_404(meal_id)
         option_of_meal = Option.query.with_parent(meal)
         option = option_of_meal.filter(Option.id == option_id).first_or_404()
-        # print('----->', str(Option.query.with_parent(meal)), end='\n\n')
-        # print(
-        #     '----->',
-        #     str(option_of_meal.filter(Option.id == option_id)),
-        #     end='\n\n'
-        # )
-        # option.votes += 1
         option.votes = Option.votes + 1
         db.session.commit()
         return option.votes
