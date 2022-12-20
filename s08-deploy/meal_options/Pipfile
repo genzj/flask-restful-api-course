@@ -9,6 +9,7 @@ flask-restful = "*"
 flask-sqlalchemy = "*"
 pytest = "*"
 gunicorn = {extras = ["gevent"], version = "*", sys_platform = "== 'linux'"}
+gevent = {version = "*", sys_platform = "== 'linux'"}
 
 [dev-packages]
 
