@@ -22,6 +22,9 @@ def configure_logging():
                 }
             },
             "root": {"level": "INFO", "handlers": ["wsgi"]},
+            # "loggers": {
+            #     "sqlalchemy.engine": {"level": "INFO"},
+            # },
         }
     )
 
